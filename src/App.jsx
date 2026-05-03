@@ -124,50 +124,7 @@ const menuData = {
       allergens: "Contains Egg", special: false,
     },
   ],
-  night: [
-    {
-      id: "t1", name: "Idli", category: "night", veg: true, price: 10,
-      desc: "Soft idili with tasty chutney & sambar",
-      taste: "Soft, Neutral — pairs with chutney", emoji: "🫓",
-      ingredients: ["Idli Rice", "Urad Dal", "Fenugreek Seeds", "Salt", "Water"],
-      allergens: "null", special: true,
-    },
-    {
-      id: "t2", name: "Kal Dosa", category: "night", veg: true, price: 20,
-      desc: "Thick stone-cooked dosa, crispy outside, soft inside",
-      taste: "Crispy, Slightly Sour", emoji: "🥞",
-      ingredients: ["Rice", "Urad Dal", "Fenugreek", "Salt", "Oil"],
-      allergens: null, special: false,
-    },
-    {
-      id: "t3", name: "Nice Dosa", category: "night", veg: true, price: 35,
-      desc: "Paper-thin golden crispy dosa made from fermented batter",
-      taste: "Crispy, Light", emoji: "🫔",
-      ingredients: ["Rice", "Urad Dal", "Chana Dal", "Salt", "Oil", "Fenugreek"],
-      allergens: null, special: false,
-    },
-    {
-      id: "t4", name: "Egg Dosa", category: "night", veg: false, price: 40,
-      desc: "Classic dosa topped with a fresh cracked egg, cooked to perfection",
-      taste: "Rich, Slightly Spicy", emoji: "🍳",
-      ingredients: ["Dosa Batter", "Egg", "Onion", "Green Chilli", "Coriander", "Oil", "Pepper"],
-      allergens: "Contains Egg", special: false,
-    },
-    {
-      id: "t5", name: "Onion Dosa", category: "night", veg: true, price: 35,
-      desc: "Crispy dosa generously topped with caramelised onion & spices",
-      taste: "Crispy, Sweet-Savoury", emoji: "🧅",
-      ingredients: ["Dosa Batter", "Onion", "Green Chilli", "Coriander", "Mustard Seeds", "Oil", "Curry Leaves"],
-      allergens: "null", special: "null",
-    },
-    {
-      id: "t6", name: "Podi Dosa", category: "night", veg: true, price: 35,
-      desc: "Dosa smeared with spicy idilypowder podi and ghee",
-      taste: "Spicy, Nutty, Bold", emoji: "🌶️",
-      ingredients: ["Dosa Batter", "Idli Podi", "Ghee", "Oil", "Curry Leaves"],
-      allergens: "Contains Groundnuts", special: true,
-    },
-  ],
+
 };
 
 const allItems = Object.values(menuData).flat();
@@ -177,7 +134,7 @@ const categoryMeta = {
   meals: { label: "Meals", emoji: "🍽️", color: "#e07b39" },
   tiffin: { label: "Tiffin", emoji: "🥞", color: "#c0882f" },
   sidedish: { label: "Side Dish", emoji: "🍳", color: "#a0522d" },
-  night: { label: "Night Menu", emoji: "🌙", color: "#2c3e50" },
+
 };
 
 // ==========================================
