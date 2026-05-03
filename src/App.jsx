@@ -149,10 +149,10 @@ const ADMIN_SETTINGS = {
   forceShopOpenToday: false,
 
   // Add the IDs of the items you want to show for Afternoon
-  afternoonMenuIds: ["m1", "m3", "s1"],
+  afternoonMenuIds: ["m1", "m3", "s1", "s2", "s3"],
 
   // Add the IDs of the items you want to show for Evening/Night
-  nightMenuIds: ["t1", "t2", "t4", "s2"],
+  nightMenuIds: ["t1", "t2", "t4", "t5", "t6", "s2", "s3", "s4"],
 };
 
 const afternoonSpecials = allItems.filter(i => ADMIN_SETTINGS.afternoonMenuIds.includes(i.id));
