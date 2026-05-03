@@ -551,17 +551,25 @@ function AboutScreen({ goHome }) {
 
       {/* LOGO */}
       <div style={{ display: "flex", justifyContent: "center", marginTop: 30, marginBottom: 20 }}>
-        <img 
-          src="/logo.jpg" 
-          alt="Mugil Lunch Point Logo" 
-          style={{ 
-            width: 220, 
-            height: 220, 
-            borderRadius: "50%", 
-            objectFit: "cover",
-            boxShadow: "0 8px 24px rgba(0,0,0,0.4)" 
-          }} 
-        />
+        <div style={{
+          width: 250, 
+          height: 250, 
+          borderRadius: "50%", 
+          overflow: "hidden",
+          boxShadow: "0 8px 24px rgba(0,0,0,0.6)",
+        }}>
+          <img 
+            src="/logo.jpg" 
+            alt="Mugil Lunch Point Logo" 
+            style={{ 
+              width: "100%", 
+              height: "100%", 
+              objectFit: "cover",
+              transform: "scale(1.18)", // Zooms in just enough to hide the white borders perfectly
+              objectPosition: "center"
+            }} 
+          />
+        </div>
       </div>
 
       <div style={{ height: 100 }} />
