@@ -19,7 +19,7 @@ const menuData = {
       special: true,
     },
     {
-      id: "m3", name: "Curd Rice", category: "meals", veg: true, price: 40,
+      id: "m3", name: "Curd Rice", category: "meals", veg: true, price: 50,
       desc: "Soft cooked rice mixed with fresh curd and tempered spices",
       taste: "Cooling, Mild", emoji: "🍚",
       ingredients: ["Rice", "Fresh Curd", "Milk", "Mustard Seeds", "Curry Leaves", "Dry Red Chilli", "Ginger", "Pomegranate (optional)"],
