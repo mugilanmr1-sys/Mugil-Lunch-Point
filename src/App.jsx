@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import zoroLogo from "./public/logo.jpg.png";
 
 const menuData = {
   meals: [
@@ -559,7 +560,7 @@ function AboutScreen({ goHome }) {
           boxShadow: "0 8px 24px rgba(0,0,0,0.6)",
         }}>
           <img 
-            src="/logo.jpg" 
+            src={zoroLogo} 
             alt="Mugil Lunch Point Logo" 
             style={{ 
               width: "100%", 
