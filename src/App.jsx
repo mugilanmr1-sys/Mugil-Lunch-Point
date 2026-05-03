@@ -149,10 +149,10 @@ const ADMIN_SETTINGS = {
   forceShopOpenToday: false,
 
   // Add the IDs of the items you want to show for Afternoon
-  afternoonMenuIds: ["m1", "m3", "s1", "s2", "s3"],
+  afternoonMenuIds: ["m1", "m3", "s1"],
 
   // Add the IDs of the items you want to show for Evening/Night
-  nightMenuIds: ["t1", "t2", "t3", "t4", "t5", "t6", "s2", "s3", "s4"],
+  nightMenuIds: ["t1", "t2", "t4", "s2"],
 };
 
 const afternoonSpecials = allItems.filter(i => ADMIN_SETTINGS.afternoonMenuIds.includes(i.id));
@@ -232,6 +232,7 @@ export default function App() {
           {screen === "home" && <HomeScreen afternoonSpecials={afternoonSpecials} nightSpecials={nightSpecials} openCategory={openCategory} search={search} setSearch={setSearch} vegFilter={vegFilter} setVegFilter={setVegFilter} menuItems={menuItems} openItem={openItem} isShopOpen={isShopOpen} />}
           {screen === "menu" && <MenuScreen cat={activeCategory} items={menuItems} search={search} setSearch={setSearch} vegFilter={vegFilter} setVegFilter={setVegFilter} goHome={goHome} openItem={openItem} />}
           {screen === "detail" && activeItem && <DetailScreen item={activeItem} goBack={goBack} goHome={goHome} />}
+          {screen === "about" && <AboutScreen goHome={goHome} />}
         </div>
 
         {/* BOTTOM NAV */}
@@ -242,10 +243,15 @@ export default function App() {
               { id: "meals", emoji: "🍽️", label: "Meals" },
               { id: "tiffin", emoji: "🥞", label: "Tiffin" },
               { id: "sidedish", emoji: "🍳", label: "Sides" },
+              { id: "about", emoji: "ℹ️", label: "About" },
             ].map(tab => {
-              const active = screen === "home" ? tab.id === "home" : activeCategory === tab.id;
+              const active = screen === tab.id ? true : (screen === "menu" && activeCategory === tab.id);
               return (
-                <button key={tab.id} style={{ ...styles.navTab, ...(active ? styles.navTabActive : {}) }} onClick={() => tab.id === "home" ? goHome() : openCategory(tab.id)}>
+                <button key={tab.id} style={{ ...styles.navTab, ...(active ? styles.navTabActive : {}) }} onClick={() => {
+                  if (tab.id === "home") goHome();
+                  else if (tab.id === "about") { setScreen("about"); setActiveCategory(null); setActiveItem(null); }
+                  else openCategory(tab.id);
+                }}>
                   <span style={{ fontSize: 18 }}>{tab.emoji}</span>
                   <span style={{ ...styles.navLabel, ...(active ? { color: "#e07b39", fontWeight: 700 } : {}) }}>{tab.label}</span>
                 </button>
@@ -506,6 +512,45 @@ function FoodCard({ item, openItem }) {
 
 function Section({ title }) {
   return <div style={styles.sectionTitle}>{title}</div>;
+}
+
+function AboutScreen({ goHome }) {
+  return (
+    <div style={styles.scrollArea}>
+      <div style={{ ...styles.header, position: "relative" }}>
+        <div>
+          <div style={styles.headerSub}>About Us</div>
+          <div style={styles.headerTitle}>Mugil Lunch Point</div>
+          <div style={styles.headerTagline}>Fresh • Homely • Tasty</div>
+        </div>
+        <div style={{ fontSize: 36 }}>👨‍🍳</div>
+      </div>
+      
+      <div style={{ padding: "0 20px" }}>
+        <Section title="Our Story" />
+        <p style={{ color: "#4a2810", opacity: 0.9, lineHeight: 1.6, fontSize: 14 }}>
+          Welcome to Mugil Lunch Point! We serve authentic, home-style South Indian food cooked with love and fresh ingredients every day. Whether you're craving a spicy Chicken Kushka or a comforting Curd Rice, we've got you covered.
+        </p>
+
+        <Section title="🕒 Timings" />
+        <div style={styles.ingredientItem}>
+          <div style={styles.ingredientText}><strong>Morning:</strong> 12:30 PM - 2:30 PM</div>
+        </div>
+        <div style={styles.ingredientItem}>
+          <div style={styles.ingredientText}><strong>Night:</strong> 7:00 PM - 10:00 PM</div>
+        </div>
+
+        <Section title="📍 Location & Contact" />
+        <div style={styles.ingredientItem}>
+          <div style={styles.ingredientText}><strong>Address:</strong> https://maps.app.goo.gl/SNs4EKj89bz2S9uc9?g_st=ac</div>
+        </div>
+        <div style={styles.ingredientItem}>
+          <div style={styles.ingredientText}><strong>Phone:</strong> +91 8608650016</div>
+        </div>
+      </div>
+      <div style={{ height: 100 }} />
+    </div>
+  );
 }
 
 const styles = {
