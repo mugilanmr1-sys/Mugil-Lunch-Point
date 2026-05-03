@@ -187,10 +187,10 @@ const categoryMeta = {
 // ==========================================
 const ADMIN_SETTINGS = {
   // If true, the shop is completely CLOSED all day (ignores the time).
-  forceShopClosedToday: true,
+  forceShopClosedToday: false,
 
   // If true, the shop is OPEN all day (ignores the time).
-  forceShopOpenToday: false,
+  forceShopOpenToday: true,
 };
 
 export default function App() {
