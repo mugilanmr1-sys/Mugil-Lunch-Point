@@ -3,7 +3,7 @@ import React, { useState, useMemo } from "react";
 const menuData = {
   meals: [
     {
-      id: "m1", name: "Chicken Kushka", category: "meals", veg: false, price: 50,
+      id: "m1", name: "Chicken Kushka", category: "meals", veg: false, price: 60,
       desc: "Fragrant spiced rice cooked with chicken neck pieces and bones",
       taste: "Mildly Spicy, Aromatic", emoji: "🍗",
       ingredients: ["Basmati Rice", "Chicken", "Onion", "Tomato", "Ginger-Garlic Paste", "Kushka Masala", "Mint Leaves", "Ghee", "Bay Leaf"],
@@ -19,7 +19,7 @@ const menuData = {
       special: true,
     },
     {
-      id: "m3", name: "Curd Rice", category: "meals", veg: true, price: 50,
+      id: "m3", name: "Curd Rice", category: "meals", veg: true, price: 40,
       desc: "Soft cooked rice mixed with fresh curd and tempered spices",
       taste: "Cooling, Mild", emoji: "🍚",
       ingredients: ["Rice", "Fresh Curd", "Milk", "Mustard Seeds", "Curry Leaves", "Dry Red Chilli", "Ginger", "Pomegranate (optional)"],
