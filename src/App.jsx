@@ -548,6 +548,22 @@ function AboutScreen({ goHome }) {
           <div style={styles.ingredientText}><strong>Phone:</strong> +91 8608650016</div>
         </div>
       </div>
+
+      {/* LOGO */}
+      <div style={{ display: "flex", justifyContent: "center", marginTop: 30, marginBottom: 20 }}>
+        <img 
+          src="/logo.jpg" 
+          alt="Mugil Lunch Point Logo" 
+          style={{ 
+            width: 220, 
+            height: 220, 
+            borderRadius: "50%", 
+            objectFit: "cover",
+            boxShadow: "0 8px 24px rgba(0,0,0,0.4)" 
+          }} 
+        />
+      </div>
+
       <div style={{ height: 100 }} />
     </div>
   );
