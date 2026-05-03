@@ -128,7 +128,6 @@ const menuData = {
 };
 
 const allItems = Object.values(menuData).flat();
-const specials = allItems.filter(i => i.special);
 
 const categoryMeta = {
   meals: { label: "Meals", emoji: "🍽️", color: "#e07b39" },
@@ -148,7 +147,16 @@ const ADMIN_SETTINGS = {
 
   // If true, the shop is OPEN all day (ignores the time).
   forceShopOpenToday: false,
+
+  // Add the IDs of the items you want to show for Afternoon
+  afternoonMenuIds: ["m1", "m2", "m3", "s1"], 
+
+  // Add the IDs of the items you want to show for Evening/Night
+  nightMenuIds: ["t1", "t2", "t4", "s2"], 
 };
+
+const afternoonSpecials = allItems.filter(i => ADMIN_SETTINGS.afternoonMenuIds.includes(i.id));
+const nightSpecials = allItems.filter(i => ADMIN_SETTINGS.nightMenuIds.includes(i.id));
 
 export default function App() {
   const [screen, setScreen] = useState("home"); // home | menu | detail
@@ -221,7 +229,7 @@ export default function App() {
 
         {/* SCREENS */}
         <div style={styles.screen}>
-          {screen === "home" && <HomeScreen specials={specials} openCategory={openCategory} search={search} setSearch={setSearch} vegFilter={vegFilter} setVegFilter={setVegFilter} menuItems={menuItems} openItem={openItem} isShopOpen={isShopOpen} />}
+          {screen === "home" && <HomeScreen afternoonSpecials={afternoonSpecials} nightSpecials={nightSpecials} openCategory={openCategory} search={search} setSearch={setSearch} vegFilter={vegFilter} setVegFilter={setVegFilter} menuItems={menuItems} openItem={openItem} isShopOpen={isShopOpen} />}
           {screen === "menu" && <MenuScreen cat={activeCategory} items={menuItems} search={search} setSearch={setSearch} vegFilter={vegFilter} setVegFilter={setVegFilter} goHome={goHome} openItem={openItem} />}
           {screen === "detail" && activeItem && <DetailScreen item={activeItem} goBack={goBack} goHome={goHome} />}
         </div>
@@ -234,7 +242,6 @@ export default function App() {
               { id: "meals", emoji: "🍽️", label: "Meals" },
               { id: "tiffin", emoji: "🥞", label: "Tiffin" },
               { id: "sidedish", emoji: "🍳", label: "Sides" },
-              { id: "night", emoji: "🌙", label: "Night" },
             ].map(tab => {
               const active = screen === "home" ? tab.id === "home" : activeCategory === tab.id;
               return (
@@ -251,13 +258,18 @@ export default function App() {
   );
 }
 
-function HomeScreen({ specials, openCategory, search, setSearch, vegFilter, setVegFilter, menuItems, openItem, isShopOpen }) {
+function HomeScreen({ afternoonSpecials, nightSpecials, openCategory, search, setSearch, vegFilter, setVegFilter, menuItems, openItem, isShopOpen }) {
   const isSearching = search.trim().length > 0;
-  const filteredSpecials = specials.filter(item => {
+  
+  const filterByVeg = (items) => items.filter(item => {
     if (vegFilter === "veg") return item.veg;
     if (vegFilter === "nonveg") return !item.veg;
     return true;
   });
+
+  const filteredAfternoon = filterByVeg(afternoonSpecials);
+  const filteredNight = filterByVeg(nightSpecials);
+
   return (
     <div style={styles.scrollArea}>
       {/* HEADER */}
@@ -291,18 +303,39 @@ function HomeScreen({ specials, openCategory, search, setSearch, vegFilter, setV
             <div style={{ fontSize: 52, filter: "drop-shadow(0 2px 6px #00000033)" }}>🍛</div>
           </div>
 
-          {/* TODAY'S SPECIALS */}
-          <Section title="⭐ Today's Special" />
-          <div style={styles.specialsRow}>
-            {filteredSpecials.map(item => (
-              <button key={item.id} style={styles.specialCard} onClick={() => openItem(item)}>
-                <div style={styles.specialEmoji}>{item.emoji}</div>
-                <div style={styles.specialName}>{item.name}</div>
-                <div style={{ ...styles.vegDot, background: item.veg ? "#3d9c3d" : "#c0392b", marginTop: 4 }} />
-                <div style={styles.specialPrice}>₹{item.price}</div>
-              </button>
-            ))}
-          </div>
+          {/* AFTERNOON MENU */}
+          {filteredAfternoon.length > 0 && (
+            <>
+              <Section title="⭐ Afternoon Menu" />
+              <div style={styles.specialsRow}>
+                {filteredAfternoon.map(item => (
+                  <button key={`afternoon-${item.id}`} style={styles.specialCard} onClick={() => openItem(item)}>
+                    <div style={styles.specialEmoji}>{item.emoji}</div>
+                    <div style={styles.specialName}>{item.name}</div>
+                    <div style={{ ...styles.vegDot, background: item.veg ? "#3d9c3d" : "#c0392b", marginTop: 4 }} />
+                    <div style={styles.specialPrice}>₹{item.price}</div>
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+
+          {/* NIGHT MENU */}
+          {filteredNight.length > 0 && (
+            <>
+              <Section title="🌙 Evening/Night Menu" />
+              <div style={styles.specialsRow}>
+                {filteredNight.map(item => (
+                  <button key={`night-${item.id}`} style={styles.specialCard} onClick={() => openItem(item)}>
+                    <div style={styles.specialEmoji}>{item.emoji}</div>
+                    <div style={styles.specialName}>{item.name}</div>
+                    <div style={{ ...styles.vegDot, background: item.veg ? "#3d9c3d" : "#c0392b", marginTop: 4 }} />
+                    <div style={styles.specialPrice}>₹{item.price}</div>
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
 
           {/* CATEGORIES */}
           <Section title="🗂 Browse Menu" />
