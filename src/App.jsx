@@ -180,6 +180,19 @@ const categoryMeta = {
   night: { label: "Night Menu", emoji: "🌙", color: "#2c3e50" },
 };
 
+// ==========================================
+// 🛠️ ADMIN SETTINGS 🛠️
+// Change this to manually open or close the shop.
+// To apply changes to Vercel, save and commit to GitHub!
+// ==========================================
+const ADMIN_SETTINGS = {
+  // If true, the shop is completely CLOSED all day (ignores the time).
+  forceShopClosedToday: true,
+
+  // If true, the shop is OPEN all day (ignores the time).
+  forceShopOpenToday: false,
+};
+
 export default function App() {
   const [screen, setScreen] = useState("home"); // home | menu | detail
   const [activeCategory, setActiveCategory] = useState(null);
@@ -189,13 +202,20 @@ export default function App() {
   const [isShopOpen, setIsShopOpen] = useState(true);
 
   const checkShopStatus = () => {
+    // 1. Check Admin Overrides First
+    if (ADMIN_SETTINGS.forceShopClosedToday) return false;
+    if (ADMIN_SETTINGS.forceShopOpenToday) return true;
+
+    // 2. Otherwise, check the regular time schedule
     const now = new Date();
     const hours = now.getHours();
     const minutes = now.getMinutes();
     const timeInMinutes = hours * 60 + minutes;
+
     // Morning: 12:30 - 14:30 (750-870 mins), Night: 19:00 - 22:00 (1140-1320 mins)
     const isMorningOpen = timeInMinutes >= 750 && timeInMinutes < 870;
     const isNightOpen = timeInMinutes >= 1140 && timeInMinutes < 1320;
+
     return isMorningOpen || isNightOpen;
   };
 
