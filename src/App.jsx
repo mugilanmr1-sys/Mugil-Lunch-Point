@@ -149,10 +149,10 @@ const ADMIN_SETTINGS = {
   forceShopOpenToday: false,
 
   // Add the IDs of the items you want to show for Afternoon
-  afternoonMenuIds: ["m1", "m2", "m3", "s1"], 
+  afternoonMenuIds: ["m1", "m3", "s1"],
 
   // Add the IDs of the items you want to show for Evening/Night
-  nightMenuIds: ["t1", "t2", "t4", "s2"], 
+  nightMenuIds: ["t1", "t2", "t4", "s2"],
 };
 
 const afternoonSpecials = allItems.filter(i => ADMIN_SETTINGS.afternoonMenuIds.includes(i.id));
@@ -260,7 +260,7 @@ export default function App() {
 
 function HomeScreen({ afternoonSpecials, nightSpecials, openCategory, search, setSearch, vegFilter, setVegFilter, menuItems, openItem, isShopOpen }) {
   const isSearching = search.trim().length > 0;
-  
+
   const filterByVeg = (items) => items.filter(item => {
     if (vegFilter === "veg") return item.veg;
     if (vegFilter === "nonveg") return !item.veg;
