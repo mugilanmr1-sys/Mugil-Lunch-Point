@@ -144,10 +144,13 @@ const categoryMeta = {
 // ==========================================
 const ADMIN_SETTINGS = {
   // If true, the shop is completely CLOSED all day (ignores the time).
-  forceShopClosedToday: true,
+  forceShopClosedToday: false,
 
   // If true, the shop is OPEN all day (ignores the time).
   forceShopOpenToday: false,
+
+  // If true, the shop is CLOSED during the night shift.
+  forceNightClosedToday: true,
 
   // Add the IDs of the items you want to show for Afternoon
   afternoonMenuIds: ["m1", "m3", "s1"],
@@ -157,7 +160,9 @@ const ADMIN_SETTINGS = {
 };
 
 const afternoonSpecials = allItems.filter(i => ADMIN_SETTINGS.afternoonMenuIds.includes(i.id));
-const nightSpecials = allItems.filter(i => ADMIN_SETTINGS.nightMenuIds.includes(i.id));
+const nightSpecials = ADMIN_SETTINGS.forceNightClosedToday 
+  ? [] 
+  : allItems.filter(i => ADMIN_SETTINGS.nightMenuIds.includes(i.id));
 
 export default function App() {
   const [screen, setScreen] = useState("home"); // home | menu | detail
@@ -180,7 +185,11 @@ export default function App() {
 
     // Morning: 12:30 - 14:30 (750-870 mins), Night: 19:00 - 22:00 (1140-1320 mins)
     const isMorningOpen = timeInMinutes >= 750 && timeInMinutes < 870;
-    const isNightOpen = timeInMinutes >= 1140 && timeInMinutes < 1320;
+    let isNightOpen = timeInMinutes >= 1140 && timeInMinutes < 1320;
+
+    if (ADMIN_SETTINGS.forceNightClosedToday) {
+      isNightOpen = false;
+    }
 
     return isMorningOpen || isNightOpen;
   };
