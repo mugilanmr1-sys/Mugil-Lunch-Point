@@ -188,7 +188,7 @@ export default function App() {
     let isNightOpen = timeInMinutes >= 1140 && timeInMinutes < 1320;
 
     if (ADMIN_SETTINGS.forceNightClosedToday) {
-      isNightOpen = true;
+      isNightOpen = false;
     }
 
     return isMorningOpen || isNightOpen;
