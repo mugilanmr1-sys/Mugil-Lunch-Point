@@ -174,8 +174,8 @@ export default function App() {
 
   const checkShopStatus = () => {
     // 1. Check Admin Overrides First
-    if (ADMIN_SETTINGS.forceShopClosedToday) return true;
-    if (ADMIN_SETTINGS.forceShopOpenToday) return false;
+    if (ADMIN_SETTINGS.forceShopClosedToday) return false;
+    if (ADMIN_SETTINGS.forceShopOpenToday) return true;
 
     // 2. Otherwise, check the regular time schedule
     const now = new Date();
@@ -188,7 +188,7 @@ export default function App() {
     let isNightOpen = timeInMinutes >= 1140 && timeInMinutes < 1320;
 
     if (ADMIN_SETTINGS.forceNightClosedToday) {
-      isNightOpen = false;
+      isNightOpen = true;
     }
 
     return isMorningOpen || isNightOpen;
