@@ -174,8 +174,8 @@ export default function App() {
 
   const checkShopStatus = () => {
     // 1. Check Admin Overrides First
-    if (ADMIN_SETTINGS.forceShopClosedToday) return false;
-    if (ADMIN_SETTINGS.forceShopOpenToday) return true;
+    if (ADMIN_SETTINGS.forceShopClosedToday) return true;
+    if (ADMIN_SETTINGS.forceShopOpenToday) return false;
 
     // 2. Otherwise, check the regular time schedule
     const now = new Date();
