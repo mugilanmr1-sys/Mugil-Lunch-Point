@@ -157,7 +157,7 @@ const ADMIN_SETTINGS = {
   forceShopOpenToday: true,
 
   // Add the IDs of the items you want to show for Afternoon
-  afternoonMenuIds: ["m1","m2","m3","m5","m7","s1","s2","s3"],
+  afternoonMenuIds: ["m1","m2","m3","m4","m5","m7","s1","s2","s3"],
 
   // Add the IDs of the items you want to show for Evening/Night
   nightMenuIds: ["t1", "t2", "t4", "s2"],
