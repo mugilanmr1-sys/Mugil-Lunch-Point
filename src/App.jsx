@@ -151,10 +151,10 @@ const categoryMeta = {
 // ==========================================
 const ADMIN_SETTINGS = {
   // If true, the shop is completely CLOSED all day (ignores the time).
-  forceShopClosedToday: true,
+  forceShopClosedToday: false,
 
   // If true, the shop is OPEN all day (ignores the time).
-  forceShopOpenToday: false,
+  forceShopOpenToday: true,
 
   // Add the IDs of the items you want to show for Afternoon
   afternoonMenuIds: ["m1","m2","m3","m5","m7","s1","s2","s3"],
